@@ -1,0 +1,27 @@
+{
+    "name": "teepluss/fast",
+    "description": "Fast is a robot making cache instead of your client.",
+    "keywords": ["laravel", "laravel4", "cache", "robot"],
+    "homepage": "https://github.com/teepluss/laravel4-fast",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Teepluss",
+            "email": "teepluss@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "classmap": [
+            "src/Teepluss/Fast/Exceptions.php"
+        ],
+        "psr-0": {
+            "Teepluss\\Fast": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}
