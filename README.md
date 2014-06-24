@@ -56,6 +56,19 @@ $content = Fast::expireInSecond(10)->remember('key-of-page', function()
 return $content;
 ~~~
 
+Find out the content problem.
+
+~~~php
+$content = Fast::debug(true)->expireInSecond(10)->remember('key-of-page', function()
+{
+    $html = 'Your HTML Goes Here.' . rand(1, 1000);
+
+    return $html;
+});
+
+return $content;
+~~~
+
 Forget your page cache.
 
 ~~~php
