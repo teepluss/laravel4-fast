@@ -8,6 +8,13 @@ use Illuminate\Cache\CacheManager;
 class Fast {
 
     /**
+     * Cache driver.
+     *
+     * @var string
+     */
+    protected $driver;
+
+    /**
      * Repository config.
      *
      * @var \Illuminate\Config\Repository
@@ -72,14 +79,13 @@ class Fast {
      */
     public function __construct(Repository $config, CacheManager $cache, Request $request)
     {
-        sd($request);
+        $this->intialize($config->get('fast::fast'));
+
         $this->config = $config;
 
-        $this->cache = $cache;
+        $this->cache = $cache->driver($this->driver);
 
         $this->request = $request;
-
-        $this->intialize($config->get('fast::fast'));
     }
 
     /**
