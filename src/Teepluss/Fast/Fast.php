@@ -163,20 +163,20 @@ class Fast {
             throw new InvalidCachingURL('Fast will work on domain map to 127.0.0.1.');
         }
 
-        // Data from cache is exists.
-        if ($data = $this->cache->tags($this->tags)->get($key) and ! $this->debug)
+        // If not a robot, so let trigger, then return fresh data.
+        if ( ! $this->isRobot())
         {
-            // Get created at to compare expires.
-            $_created_at = $data['_created_at'];
-
-            // Current expired in x seconds.
-            $expires = $_created_at + $this->expireInSecond;
-
-            // Cache expired.
-            if ($expires < time())
+            // Data from cache is exists.
+            if ($data = $this->cache->tags($this->tags)->get($key) and ! $this->debug)
             {
-                // If not a robot, so let trigger.
-                if ( ! $this->isRobot())
+                // Get created at to compare expires.
+                $_created_at = $data['_created_at'];
+
+                // Current expired in x seconds.
+                $expires = $_created_at + $this->expireInSecond;
+
+                // Cache expired.
+                if ($expires < time())
                 {
                     $processingKey = 'processing-'.$key;
 
@@ -188,11 +188,7 @@ class Fast {
                         $this->trigger($processingKey, $currentUrl);
                     }
                 }
-            }
 
-            // Return data from cache to a human.
-            if ( ! $this->isRobot())
-            {
                 return array_get($data, '_data');
             }
         }
